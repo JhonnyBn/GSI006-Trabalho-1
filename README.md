@@ -16,9 +16,9 @@ Um arquivo contem a quantidade de veículos produzidos em suas M versões. Esse 
 
 Um EXEMPLO de conteúdo do arquivo descrito imediatamente acima é apresentado a seguir.
 
-X Y
-ST LX LXS
-2 3 4
+X Y  
+ST LX LXS  
+2 3 4  
 3 2 5
 
 A primeira linha apresenta o nome dos tipos de veículos fabricados: X e Y. A segunda apresenta o nome das versões desses tipos de veículo: ST, LX e LXS. Portanto, são produzidos N = 2 tipos de veículos (X e Y), cada um em M = 3 versões (ST, LX e LXS). As demais linhas apresentam, respectivamente, as quantidades de veículos produzidos nessas versões. A linha 2 3 4, por exemplo, informa que, com relação ao veículo do tipo X, foram produzidos: 2 unidades da versção ST, 3 da versão LX e 4 da LXS.Por sua vez, a linha 3 2 5 informa que, com relação ao veículo tipo Y, foram produzidos: 3 unidade da versão ST, 2 da versão LX e 5 da versão LXS.
@@ -32,11 +32,11 @@ O outro arquivo contém a quantidade de peças utilizadas na montagem dos N tipo
 
 Um EXEMPLO de conteúdo do arquivo descrito imediatamente acima é apresentado a seguir.
 
-A B C
-X Y
-4 3
-3 5
-6 2
+A B C  
+X Y  
+4 3  
+3 5  
+6 2  
 
 A primeira linha apresenta o nome dos tipos de peças utilizados pela indústria: A, B e C. A segunda linha apresenta o nome dos tipos de veículos fabricados: X e Y. Portanto, são utilizados P = 3 tipos de peças (A, B e C) na construção dos N = 2 tipos de veículos (X e Y). As demais linhas apresentam, respectivamente, a quantidade de peças utilizadas em cada um dos tipos de veículo. A linha 4 3, por exemplo, informa que, com relação à peça A, foram utilizadas: 4 unidades no veículo X e 3 no Y. A linha 3 5 informa que, com relação à peça B, foram utilizadas: 3 unidades no veículo tipo X e 5 no Y. Finalmente, a linha 6 2 informa que, com relação à peça tipo C, foram utilizadas: 6 unidades no veículo tipo X e 2 no Y.
 
