@@ -1,5 +1,5 @@
 /*
-	Programa dedicado a mostrar tabelas de PeÁas x Modelos de carros
+	Programa dedicado a mostrar tabelas de Pe√ßas x Modelos de carros
 	
 	Feito por:
 	
@@ -12,7 +12,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <ctype.h>
 
 #define MAXLETRAS 30
 
@@ -26,7 +25,7 @@ struct matriz
 };
 typedef struct matriz Matriz;
 
-// ProtÛtipos
+// Prot√≥tipos
 
 int** alocarMatriz(int Linhas, int Colunas);
 char** alocarMatrizChar(int Linhas, int Colunas);
@@ -48,15 +47,15 @@ int
 main (int argc, char *argv[])
 {
     Matriz *modelos; // Guarda a matriz de modelos
-    Matriz *pecas; // Guarda a matriz de peÁas
+    Matriz *pecas; // Guarda a matriz de pe√ßas
 
-    int mdl = 0; // Auxiliar para guardar a posiÁ„o da matriz de modelos de carro em argv
-    int pcs = 0; // Auxiliar para guardar a posiÁ„o da matriz de peÁas de carro em argv
+    int mdl = 0; // Auxiliar para guardar a posi√ß√£o da matriz de modelos de carro em argv
+    int pcs = 0; // Auxiliar para guardar a posi√ß√£o da matriz de pe√ßas de carro em argv
 
     if (!argsOk(argc, argv)) // Se houve erro nos argumentos, encerra o programa retornando 1
         return 1;
 
-    if (!strcmp(argv[1],"-mdl")) // Checa a posiÁ„o dos arquivos para carregar a Matriz
+    if (!strcmp(argv[1],"-mdl")) // Checa a posi√ß√£o dos arquivos para carregar a Matriz
     {
         mdl = 2;
         pcs = 4;
@@ -68,12 +67,12 @@ main (int argc, char *argv[])
     }
 	
     modelos = loadMatriz(argv[mdl]); // Carrega a Matriz de modelos
-	pecas = loadMatriz(argv[pcs]); // Carrega a Matriz de peÁas
+	pecas = loadMatriz(argv[pcs]); // Carrega a Matriz de pe√ßas
 	
 	if (modelos == NULL || pecas == NULL) // Se houve erro no carregamento, encerra o programa retornando 1
 		return 1;
 	
-	if (!compatibleMatrix(modelos, pecas)) // Se as matrizes n„o forem compatÌveis, encerra o programa retornando 1
+	if (!compatibleMatrix(modelos, pecas)) // Se as matrizes n√£o forem compat√≠veis, encerra o programa retornando 1
 		return 1;
 	
     carsbytype(modelos); // Problema A
@@ -90,23 +89,23 @@ main (int argc, char *argv[])
 // --- Functions ---
 
 /*
-    alocarMatriz recebe a quantidade de Linhas e Colunas como Par‚metro,
-    e alloca dinamicamente uma matriz de n˙meros inteiros,
-    retornando a posiÁ„o dessa matriz, ou NULL em caso de erro, junto de uma mensagem.
+    alocarMatriz recebe a quantidade de Linhas e Colunas como Par√¢metro,
+    e alloca dinamicamente uma matriz de n√∫meros inteiros,
+    retornando a posi√ß√£o dessa matriz, ou NULL em caso de erro, junto de uma mensagem.
 */
-int** alocarMatriz(int Linhas,int Colunas)  // Recebe a quantidade de Linhas e Colunas como Par‚metro
+int** alocarMatriz(int Linhas,int Colunas)  // Recebe a quantidade de Linhas e Colunas como Par√¢metro
 {
 
-	int i,j; // Vari·veis Auxiliares
+	int i,j; // Vari√°veis Auxiliares
 
 	int **m = (int**)malloc(Linhas * sizeof(int*)); // Aloca um Vetor de Ponteiros
-	if (m == NULL) // Retorna NULL se houve erro na alocaÁ„o
+	if (m == NULL) // Retorna NULL se houve erro na aloca√ß√£o
 		return NULL;
 
 	for (i = 0; i < Linhas; i++) // Percorre as linhas do Vetor de Ponteiros
 	{
-		m[i] = (int*) malloc(Colunas * sizeof(int)); // Aloca um Vetor de Inteiros para cada posiÁ„o do Vetor de Ponteiros
-		if (m[i] == NULL) // Em caso de erro de alocaÁ„o, libera a matriz e retorna NULL
+		m[i] = (int*) malloc(Colunas * sizeof(int)); // Aloca um Vetor de Inteiros para cada posi√ß√£o do Vetor de Ponteiros
+		if (m[i] == NULL) // Em caso de erro de aloca√ß√£o, libera a matriz e retorna NULL
 		{
 			while (--i >= 0)
 				free(m[i]);
@@ -122,23 +121,23 @@ int** alocarMatriz(int Linhas,int Colunas)  // Recebe a quantidade de Linhas e C
 }
 
 /*
-    alocarMatrizChar recebe a quantidade de strings e tamanho m·ximo de letras por string como Par‚metro,
+    alocarMatrizChar recebe a quantidade de strings e tamanho m√°ximo de letras por string como Par√¢metro,
     e alloca dinamicamente uma matriz de chars para criar um "vetor de strings",
-    retornando a posiÁ„o dessa matriz, ou NULL em caso de erro, junto de uma mensagem.
+    retornando a posi√ß√£o dessa matriz, ou NULL em caso de erro, junto de uma mensagem.
 */
-char** alocarMatrizChar(int Linhas,int Colunas) // Recebe a quantidade de Linhas e Colunas como Par‚metro
+char** alocarMatrizChar(int Linhas,int Colunas) // Recebe a quantidade de Linhas e Colunas como Par√¢metro
 {
 
-	int i,j; // Vari·veis Auxiliares
+	int i,j; // Vari√°veis Auxiliares
 
 	char **m = (char**)malloc(Linhas * sizeof(char*)); // Aloca um Vetor de Ponteiros
-	if (m == NULL) // Retorna NULL se houve erro na alocaÁ„o
+	if (m == NULL) // Retorna NULL se houve erro na aloca√ß√£o
 		return NULL;
 
 	for (i = 0; i < Linhas; i++) // Percorre as linhas do Vetor de Ponteiros
 	{
-		m[i] = (char*) malloc(Colunas * sizeof(char)); // Aloca um Vetor para cada posiÁ„o do Vetor de Ponteiros.
-		if (m[i] == NULL) // Em caso de erro de alocaÁ„o, libera a matriz e retorna NULL
+		m[i] = (char*) malloc(Colunas * sizeof(char)); // Aloca um Vetor para cada posi√ß√£o do Vetor de Ponteiros.
+		if (m[i] == NULL) // Em caso de erro de aloca√ß√£o, libera a matriz e retorna NULL
 		{
 			while (--i >= 0)
 				free(m[i]);
@@ -154,10 +153,10 @@ char** alocarMatrizChar(int Linhas,int Colunas) // Recebe a quantidade de Linhas
 }
 
 /*
-    argsOk tÍm como par‚metro argc e argv da main,
-    Sua funÁ„o È verificar se os argumentos est„o de acordo com a proposta do programa
+    argsOk t√™m como par√¢metro argc e argv da main,
+    Sua fun√ß√£o √© verificar se os argumentos est√£o de acordo com a proposta do programa
     retornando 1 se sim,
-    e se n„o, exibe erro e retorna 0.
+    e se n√£o, exibe erro e retorna 0.
 */
 int
 argsOk(int argc, char *argv[])
@@ -172,16 +171,16 @@ argsOk(int argc, char *argv[])
         fprintf(stderr, "%s: too many arguments.\n", argv[0]);
         return 0;
     }
-    if ( ( (!strcmp(argv[1],"-mdl")) && (!strcmp(argv[3],"-pcs")) ) || ( (!strcmp(argv[1],"-pcs")) && (!strcmp(argv[3],"-mdl")) ) ) // Verifica se os par‚metros s„o v·lidos
+    if ( ( (!strcmp(argv[1],"-mdl")) && (!strcmp(argv[3],"-pcs")) ) || ( (!strcmp(argv[1],"-pcs")) && (!strcmp(argv[3],"-mdl")) ) ) // Verifica se os par√¢metros s√£o v√°lidos
     {
         return 1;
     }
-    else if ( (!strcmp(argv[1],"-mdl")) || (!strcmp(argv[1],"-pcs")) ) // Caso o primeiro par‚metro seja v·lido e o segundo inv·lido
+    else if ( (!strcmp(argv[1],"-mdl")) || (!strcmp(argv[1],"-pcs")) ) // Caso o primeiro par√¢metro seja v√°lido e o segundo inv√°lido
 	{
 		fprintf(stderr, "%s: invalid parameter\n", argv[3]);
         return 0;
     }
-	else // Caso o primeiro par‚metro seja inv·lido
+	else // Caso o primeiro par√¢metro seja inv√°lido
 	{
 		fprintf(stderr, "%s: invalid parameter\n", argv[1]);
 		return 0;
@@ -189,14 +188,14 @@ argsOk(int argc, char *argv[])
 }
 
 /*
-    carsbytype tÍm como par‚metro duas Matriz,
-    Sua funÁ„o È mostrar quantos veÌculos de um determinado tipo foram construÌdos, por tipo e total.
+    carsbytype t√™m como par√¢metro duas Matriz,
+    Sua fun√ß√£o √© mostrar quantos ve√≠culos de um determinado tipo foram constru√≠dos, por tipo e total.
 */
 void
 carsbytype(Matriz *modelos)
 {
-    int i; // Vari·vel auxiliar
-    int* v; // Ponteiro para armazenar o numero de veÌculos
+    int i; // Vari√°vel auxiliar
+    int* v; // Ponteiro para armazenar o numero de ve√≠culos
     
 	v = (int*)malloc(modelos->linhas*sizeof(int));
 	
@@ -218,14 +217,14 @@ carsbytype(Matriz *modelos)
 }
 
 /*
-    carsbyversion tÍm como par‚metro duas Matriz,
-    Sua funÁ„o È mostrar quantos veÌculos de uma determinada vers„o foram construÌdos, por vers„o e total.
+    carsbyversion t√™m como par√¢metro duas Matriz,
+    Sua fun√ß√£o √© mostrar quantos ve√≠culos de uma determinada vers√£o foram constru√≠dos, por vers√£o e total.
 */
 void
 carsbyversion(Matriz *modelos)
 {
-    int i, j; // Vari·veis auxiliares
-    int* v; // Ponteiro para armazenar o numero de veÌculos
+    int i, j; // Vari√°veis auxiliares
+    int* v; // Ponteiro para armazenar o numero de ve√≠culos
 	
     v = (int*)malloc(modelos->colunas*sizeof(int));
     
@@ -251,7 +250,7 @@ carsbyversion(Matriz *modelos)
 
 /*
 	compatibleMatrix recebe duas Matriz* como argumento,
-	Sua funÁ„o È retornar 1 se as matrizes s„o compatÌveis ou 0 em caso contr·rio
+	Sua fun√ß√£o √© retornar 1 se as matrizes s√£o compat√≠veis ou 0 em caso contr√°rio
 */
 int
 compatibleMatrix(Matriz *modelos, Matriz *pecas)
@@ -274,7 +273,7 @@ compatibleMatrix(Matriz *modelos, Matriz *pecas)
 
 /*
 	freeMatriz recebe um ponteiro de Matrix como argumento,
-	e libera a memÛria dos membros de sua struct
+	e libera a mem√≥ria dos membros de sua struct
 */
 void freeMatriz(Matriz* m) {
 	int i;
@@ -300,19 +299,19 @@ void freeMatriz(Matriz* m) {
 }
 
 /*
-	loadMatrix tÍm como par‚metro um stringa que corresponde ao nome de um arquivo,
-	Sua funÁ„o È retornar uma Matrix com todos os dados preenchidos.
+	loadMatrix t√™m como par√¢metro um stringa que corresponde ao nome de um arquivo,
+	Sua fun√ß√£o √© retornar uma Matrix com todos os dados preenchidos.
 */
 Matriz*
 loadMatriz (char *arquivo)
 {
-    int i = 0, j = 0; // Vari·veis auxiliares
+    int i = 0, j = 0; // Vari√°veis auxiliares
     char aux = 0; // Auxiliar para ler o arquivo
-    char palavras = 0; // Auxiliar para contar a quantidade de palavras nos cabeÁalhos
-	FILE *fp = fopen(arquivo,"r"); // Arquivo que ser· lido
+    char palavras = 0; // Auxiliar para contar a quantidade de palavras nos cabe√ßalhos
+	FILE *fp = fopen(arquivo,"r"); // Arquivo que ser√° lido
 	Matriz* m = (Matriz*)malloc(sizeof(Matriz)); // Matriz a ser preenchida
 	
-	if (fp == NULL) // Caso o arquivo n„o seja encontrado
+	if (fp == NULL) // Caso o arquivo n√£o seja encontrado
 	{
 		fprintf(stderr, "%s: File not found", arquivo);
 		free(m);
@@ -333,20 +332,20 @@ loadMatriz (char *arquivo)
     }
     m->linhas = palavras+1;
 
-    fscanf(fp, "%c", &aux); // Passa para o prÛximo caractere apÛs o '\n' da linha anterior
+    fscanf(fp, "%c", &aux); // Passa para o pr√≥ximo caractere ap√≥s o '\n' da linha anterior
 
     palavras = 0; // Reseta o contador de palavras
     while(aux != '\n')
     {
         fscanf(fp, "%c", &aux);
         if (aux == ' ')
-            palavras++; // Conta quantas palavras h· na segunda linha
+            palavras++; // Conta quantas palavras h√° na segunda linha
     }
     m->colunas = palavras+1;
 	
 	while (fscanf(fp, "%c", &aux) == 1) // Percorre o resto do arquivo verificando a matriz
 	{
-		if (!validchar(aux)) // Se um caractere n„o for v·lido para matrizes retorna NULL
+		if (!validchar(aux)) // Se um caractere n√£o for v√°lido para matrizes retorna NULL
 		{
 			fprintf(stderr, "%s: invalid character '%c' in matrix line %d column %d\n", arquivo, aux, i+2, j);
 			fclose(fp);
@@ -358,11 +357,11 @@ loadMatriz (char *arquivo)
 	}
     fclose(fp);
 
-    m->cabecalhoum = alocarMatrizChar(m->linhas, MAXLETRAS); // Aloca dinamicamente um vetor de strings para o primeiro cabeÁalho
-    m->cabecalhodois = alocarMatrizChar(m->colunas, MAXLETRAS); // Aloca dinamicamente um vetor de strings para o segundo cabeÁalho
+    m->cabecalhoum = alocarMatrizChar(m->linhas, MAXLETRAS); // Aloca dinamicamente um vetor de strings para o primeiro cabe√ßalho
+    m->cabecalhodois = alocarMatrizChar(m->colunas, MAXLETRAS); // Aloca dinamicamente um vetor de strings para o segundo cabe√ßalho
     m->matriz = alocarMatriz(m->linhas, m->colunas); // Aloca dinamicamente a matriz de inteiros
 	
-	if (m->cabecalhoum == NULL || m->cabecalhodois == NULL || m->matriz == NULL) // Em caso de erro nas alocaÁıes, retorna NULL
+	if (m->cabecalhoum == NULL || m->cabecalhodois == NULL || m->matriz == NULL) // Em caso de erro nas aloca√ß√µes, retorna NULL
 	{
 		fprintf(stderr,"Out of memory\n");
 		freeMatriz(m);
@@ -387,13 +386,13 @@ loadMatriz (char *arquivo)
 }
 
 /*
-    partsbyversion tÍm como par‚metro duas Matriz,
-    Sua funÁ„o È mostrar quantas peÁas foram utilizadas na produÁ„o de um determinado tipo de veÌculo, independente da vers„o, por tipo e total.
+    partsbyversion t√™m como par√¢metro duas Matriz,
+    Sua fun√ß√£o √© mostrar quantas pe√ßas foram utilizadas na produ√ß√£o de um determinado tipo de ve√≠culo, independente da vers√£o, por tipo e total.
 */
 void
 partsbyversion(Matriz *pecas)
 {
-    int i, j; // Vari·veis auxiliares
+    int i, j; // Vari√°veis auxiliares
 	int* v; // Ponteiro para armazenar as partes
     int* total; // Ponteiro para armazenar o total de partes
 	
@@ -434,7 +433,7 @@ int
 sum(int* v, int size)
 {
     int i;
-    int s = 0; // Vari·vel para a soma
+    int s = 0; // Vari√°vel para a soma
 
     for (i = 0; i < size; i++)
         s += v[i]; // Soma o vetor
@@ -442,15 +441,15 @@ sum(int* v, int size)
 }
 
 /*
-    totalpartsbycarversion tÍm como par‚metro duas Matriz,
-    Sua funÁ„o È mostrar quantas peÁas foram utilizadas na produÁ„o de uma determinada vers„o, independente do tipo, por vers„o e total.
+    totalpartsbycarversion t√™m como par√¢metro duas Matriz,
+    Sua fun√ß√£o √© mostrar quantas pe√ßas foram utilizadas na produ√ß√£o de uma determinada vers√£o, independente do tipo, por vers√£o e total.
 */
 void
 totalpartsbycarversion(Matriz *modelos, Matriz *pecas)
 {
-    int i, j, k; // Vari·veis auxiliares
+    int i, j, k; // Vari√°veis auxiliares
 	int* v; // Ponteiro para armazenar as partes
-    int* total; // Ponteiro para armazenar os totais de peÁas
+    int* total; // Ponteiro para armazenar os totais de pe√ßas
     
 	v = (int*)malloc(pecas->linhas*sizeof(int));
 	total = (int*)malloc(pecas->linhas*sizeof(int));
@@ -485,13 +484,13 @@ totalpartsbycarversion(Matriz *modelos, Matriz *pecas)
 }
 
 /*
-	validchar recebe como par‚metro o valor inteiro de um char,
-	Sua funÁ„o È verificar se o char È v·lido para multiplicaÁ„o de matrizes, retornando 1 se sim e 0 caso contr·rio
+	validchar recebe como par√¢metro o valor inteiro de um char,
+	Sua fun√ß√£o √© verificar se o char √© v√°lido para multiplica√ß√£o de matrizes, retornando 1 se sim e 0 caso contr√°rio
 */
 int
 validchar (int c)
 {
-	// Na ASCII, '1' vale 49, '9' vale 57, espaÁo ' ' vale 32, '\n' vale 10, TAB '	' vale 9, '\0' vale 0
+	// Na ASCII, '1' vale 49, '9' vale 57, espa√ßo ' ' vale 32, '\n' vale 10, TAB '	' vale 9, '\0' vale 0
 	if ((c > 48 && c < 58) || c == 32 || c == 10 || c == 9 || c == 0)
 		return 1;
 	
@@ -499,8 +498,8 @@ validchar (int c)
 }
 
 /*
-    printMatriz recebe como par‚metro uma struct Matriz,
-    Sua funÁ„o È imprimir todos os dados dessa struct.
+    printMatriz recebe como par√¢metro uma struct Matriz,
+    Sua fun√ß√£o √© imprimir todos os dados dessa struct.
 */
 void printMatriz (Matriz *m) {
     int i, j;
